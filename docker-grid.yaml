@@ -10,7 +10,7 @@ services:
     depends_on:
     - hub
     deploy:
-      replicas: 1
+      replicas: 0
     env_file: .env
   firefox:
     image: selenium/node-firefox:4.16
@@ -18,7 +18,7 @@ services:
     depends_on:
     - hub
     deploy:
-      replicas: 1
+      replicas: 0
     env_file: .env
   edge:
     image: selenium/node-edge:120.0
@@ -26,5 +26,5 @@ services:
     depends_on:
     - hub
     deploy:
-      replicas: 1
+      replicas: 0
     env_file: .env
