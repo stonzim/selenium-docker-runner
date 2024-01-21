@@ -5,13 +5,14 @@ pipeline {
     parameters {
         choice choices: ['chrome', 'firefox', 'edge'], description: 'Select the browser', name: 'BROWSER'
         choice choices: ['1', '2', '3', '4'], description: 'Select the number of browser containers to run. Recommend using the same number as that of suites being run.', name: 'NUMBER_OF_BROWSERS'
+        choice choices: ['1', '2', '3', '4'], description: 'Select the number of TestNG threads to run.', name: 'THREAD_COUNT'
     }
 
     stages {
 
         stage('Start Grid') {
             steps {
-                sh "docker compose -f docker-grid.yaml up --scale ${params.BROWSER}=${params.NUMBER_OF_BROWSERS} -d"
+                sh "THREAD_COUNT=${params.THREAD_COUNT} docker compose -f docker-grid.yaml up --scale ${params.BROWSER}=${params.NUMBER_OF_BROWSERS} -d"
             }
         }
 
