@@ -4,13 +4,14 @@ pipeline {
 
     parameters {
         choice choices: ['chrome', 'firefox', 'edge'], description: 'Select the browser', name: 'BROWSER'
+        choice choices: ['1', '2', '3', '4'], description: 'Select the number of browser containers to run', name: 'NUMBER_OF_BROWSERS'
     }
 
     stages {
 
         stage('Start Grid') {
             steps {
-                sh "docker compose -f docker-grid.yaml up --scale ${params.BROWSER}=2 -d"
+                sh "docker compose -f docker-grid.yaml up --scale ${params.BROWSER}=${params.NUMBER_OF_BROWSERS} -d"
             }
         }
 
