@@ -4,7 +4,7 @@ pipeline {
 
     parameters {
         choice choices: ['chrome', 'firefox', 'edge'], description: 'Select the browser', name: 'BROWSER'
-        choice choices: ['1', '2', '3', '4'], description: 'Select the number of browser containers to run', name: 'NUMBER_OF_BROWSERS'
+        choice choices: ['1', '2', '3', '4'], description: 'Select the number of browser containers to run. Recommend using the same number as that of suites being run.', name: 'NUMBER_OF_BROWSERS'
     }
 
     stages {
