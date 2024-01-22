@@ -14,7 +14,7 @@ pipeline {
         stage('Start Grid') {
             steps {
                 script {
-                    def FOLDER = "${params.TEST_SUITE}".split('.')
+                    def FOLDER = "${params.TEST_SUITE}".split('\\.')
                     println("${params.TEST_SUITE}")
                     println(FOLDER)
                 }
