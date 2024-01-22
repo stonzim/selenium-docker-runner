@@ -9,10 +9,6 @@ pipeline {
         choice choices: ['vendor-portal.xml', 'flight-reservation.xml', 'all-suites.xml'], description: 'Select the single suite you would like to run, or select "All Suites".', name: 'TEST_SUITE'
     }
 
-    environment {
-        FOLDER
-    }
-
     stages {
 
         stage('Start Grid') {
