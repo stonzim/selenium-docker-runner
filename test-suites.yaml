@@ -9,12 +9,3 @@ services:
     - TEST_SUITE
     volumes:
     - ./output/${FOLDER}:/home/selenium-docker/test-output
-  flight-reservation:
-    image: stonzim/selenium:latest
-    environment:
-    - BROWSER
-    - HUB_HOST=hub    
-    - THREAD_COUNT
-    - TEST_SUITE
-    volumes:
-    - ./output/${FOLDER}:/home/selenium-docker/test-output
