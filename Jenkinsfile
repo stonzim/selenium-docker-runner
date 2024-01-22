@@ -15,6 +15,7 @@ pipeline {
             steps {
                 script {
                     def FOLDER = "${params.TEST_SUITE}".split('.')
+                    println("${params.TEST_SUITE}")
                     println(FOLDER)
                 }
                 sh "THREAD_COUNT=${params.THREAD_COUNT} TEST_SUITE=${params.TEST_SUITE} docker compose -f docker-grid.yaml up --scale ${params.BROWSER}=${params.NUMBER_OF_BROWSERS} -d"
