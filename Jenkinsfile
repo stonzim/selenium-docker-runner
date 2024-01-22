@@ -13,9 +13,7 @@ pipeline {
 
         stage('Start Grid') {
             steps {
-                sh "SUITE=${params.TEST_SUITE}"
-                sh """FOLDER=(${SUITE//./ })"""
-                sh "THREAD_COUNT=${params.THREAD_COUNT} TEST_SUITE=${params.TEST_SUITE} FOLDER=$FOLDER docker compose -f docker-grid.yaml up --scale ${params.BROWSER}=${params.NUMBER_OF_BROWSERS} -d"
+                sh "THREAD_COUNT=${params.THREAD_COUNT} TEST_SUITE=${params.TEST_SUITE} FOLDER=TEST_SUITE docker compose -f docker-grid.yaml up --scale ${params.BROWSER}=${params.NUMBER_OF_BROWSERS} -d"
             }
         }
 
