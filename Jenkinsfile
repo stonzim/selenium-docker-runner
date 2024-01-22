@@ -14,8 +14,7 @@ pipeline {
         stage('Start Grid') {
             steps {
                 script {
-                    def FOLDER = "${params.TEST_SUITE}".split('\\.')[0]
-                    "${env.FOLDER}" = FOLDER
+                    "${env.FOLDER}" = "${params.TEST_SUITE}".split('\\.')[0]
                 }
                 sh "THREAD_COUNT=${params.THREAD_COUNT} TEST_SUITE=${params.TEST_SUITE} FOLDER=${env.FOLDER} docker compose -f docker-grid.yaml up --scale ${params.BROWSER}=${params.NUMBER_OF_BROWSERS} -d"
             }
