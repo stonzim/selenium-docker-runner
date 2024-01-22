@@ -34,8 +34,7 @@ pipeline {
         always {
             sh "docker compose -f docker-grid.yaml down"
             sh "docker compose -f test-suites.yaml down"
-            archiveArtifacts artifacts: 'output/flight-reservation/emailable-report.html', followSymlinks: false
-            archiveArtifacts artifacts: 'output/vendor-portal/emailable-report.html', followSymlinks: false
+            archiveArtifacts artifacts: "output/${params.TEST_SUITE}/emailable-report.html", followSymlinks: false
         }
     }
 
