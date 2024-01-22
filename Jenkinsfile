@@ -13,9 +13,7 @@ pipeline {
 
         stage('Start Grid') {
             steps {
-                script {
-                    env.FOLDER = "${params.TEST_SUITE}".split('\\.')[0]
-                }
+                script { env.FOLDER = "${params.TEST_SUITE}".split('\\.')[0] }
                 sh "THREAD_COUNT=${params.THREAD_COUNT} TEST_SUITE=${params.TEST_SUITE} FOLDER=${env.FOLDER} docker compose -f docker-grid.yaml up --scale ${params.BROWSER}=${params.NUMBER_OF_BROWSERS} -d"
             }
         }
@@ -37,7 +35,7 @@ pipeline {
         always {
             sh "docker compose -f docker-grid.yaml down"
             sh "docker compose -f test-suites.yaml down"
-            archiveArtifacts artifacts: "output/${params.TEST_SUITE}/emailable-report.html", followSymlinks: false
+            archiveArtifacts artifacts: "output/${env.FOLDER}/emailable-report.html", followSymlinks: false
         }
     }
 
