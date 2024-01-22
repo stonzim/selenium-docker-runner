@@ -6,13 +6,14 @@ pipeline {
         choice choices: ['chrome', 'firefox', 'edge'], description: 'Select the browser', name: 'BROWSER'
         choice choices: ['1', '2', '3', '4'], description: 'Select the number of browser containers to run. Recommend using the same number as that of suites being run.', name: 'NUMBER_OF_BROWSERS'
         choice choices: ['1', '2', '3', '4'], description: 'Select the number of TestNG threads to run.', name: 'THREAD_COUNT'
+        choice choices: ['vendor-portal.xml', 'flight-reservation.xml', 'all-suites.xml'], description: 'Select the single suite you would like to run, or select "All Suites".', name: 'TEST_SUITE'
     }
 
     stages {
 
         stage('Start Grid') {
             steps {
-                sh "THREAD_COUNT=${params.THREAD_COUNT} docker compose -f docker-grid.yaml up --scale ${params.BROWSER}=${params.NUMBER_OF_BROWSERS} -d"
+                sh "THREAD_COUNT=${params.THREAD_COUNT} TEST_SUITE=${params.TEST_SUITE} docker compose -f docker-grid.yaml up --scale ${params.BROWSER}=${params.NUMBER_OF_BROWSERS} -d"
             }
         }
 
