@@ -9,13 +9,17 @@ pipeline {
         choice choices: ['vendor-portal.xml', 'flight-reservation.xml', 'all-suites.xml'], description: 'Select the single suite you would like to run, or select "All Suites".', name: 'TEST_SUITE'
     }
 
+    environment {
+        FOLDER
+    }
+
     stages {
 
         stage('Start Grid') {
             steps {
                 script {
-                    def FOLDER = "${params.TEST_SUITE}".split('\\.')
-                    println(FOLDER[0])
+                    ${FOLDER} = "${params.TEST_SUITE}".split('\\.')[0]
+                    println(FOLDER)
                 }
                 sh "THREAD_COUNT=${params.THREAD_COUNT} TEST_SUITE=${params.TEST_SUITE} FOLDER=${FOLDER} docker compose -f docker-grid.yaml up --scale ${params.BROWSER}=${params.NUMBER_OF_BROWSERS} -d"
             }
